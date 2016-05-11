@@ -6,6 +6,10 @@
 # Copyright (C) 2016, Christophe Fauchard
 #-----------------------------------------------------------------
 
+import sys
+sys.path.insert(0, "../")
+import zeus
+
 class FileNotFoundException(Exception):
 
     def __init__(self, filename):
