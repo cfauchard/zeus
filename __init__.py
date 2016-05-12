@@ -15,8 +15,10 @@ if sys.version_info < (3, 5):
 from zeus.file import Log
 from zeus.parser import ConfigParser
 from zeus.exception import FileNotFoundException, InvalidConfigurationFileException
+from zeus.crypto import SimpleCrypt
 
 __all__ = [ 'Log',
             'ConfigParser',
+            'SimpleCrypt',
             'FileNotFoundException',
             'InvalidConfigurationFileException' ]

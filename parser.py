@@ -6,15 +6,8 @@
 # Copyright (C) 2016, Christophe Fauchard
 #-----------------------------------------------------------------
 
-import sys
-sys.path.insert(0, "../")
-import zeus
-
 import os
-import itertools
-from zeus.exception import FileNotFoundException, InvalidConfigurationFileException
-from configparser import RawConfigParser
-
+from configparser import RawConfigParser, MissingSectionHeaderError
 
 class ConfigParser(RawConfigParser):
     def __init__(self, file_name):
@@ -22,16 +15,28 @@ class ConfigParser(RawConfigParser):
         self.file_name = file_name
 
         if not os.path.isfile(file_name):
-            raise(zeus.exception.FileNotFoundException(self.file_name))
+            raise(FileNotFoundException(self.file_name))
 
         try:
             self.read(self.file_name)
 
-        except configparser.MissingSectionHeaderError:
-            raise(zeus.exception.InvalidConfigurationFileException(self.file_name))
+        except MissingSectionHeaderError:
+            raise(InvalidConfigurationFileException(self.file_name))
 
+    def __str__(self):
+        return_string = ""
+        for section in self.sections():
+            return_string = return_string + "\n[" + section + "]\n"
+            for key in self.items(section):
+                return_string = return_string + key[0] + " = " + key[1] + "\n" 
+        return(return_string)
+
+        
 if __name__ == '__main__':
-    
+    import sys
+    sys.path.insert(0, "../")
+    import zeus
+
     print("version zeus: " + zeus.__version__)
     print("Running tests for parser.py...")
 
@@ -39,17 +44,13 @@ if __name__ == '__main__':
 
     try:
         config_file = 'parser_sample1.cfg'
-        parser = zeus.ConfigParser(config_file)
+        parser = ConfigParser(config_file)
 
-        print("parsing of " + config_file + " done");
-        for section in parser.sections():
-            print(section)
-            for key in parser.items(section):
-                print(key)
-
+        print("parsing of " + config_file + " done")
+        print(parser)
         print("Class ConfigParser passed")
 
-    except zeus.exception.FileNotFoundException as error:
+    except FileNotFoundException as error:
         print("Class ConfigParser not passed, File not found: " + error.filename)
     except:
         print("Class ConfigParser not passed, Unexpected error:", sys.exc_info()[0])

@@ -6,10 +6,6 @@
 # Copyright (C) 2016, Christophe Fauchard
 #-----------------------------------------------------------------
 
-import sys
-sys.path.insert(0, "../")
-import zeus
-
 class Log():
     """
     Log Class with switch capabilities
@@ -35,7 +31,11 @@ class Log():
     def close(self):
         self.fd.close()
 
-if __name__ == '__main__':                
+if __name__ == '__main__':
+    import sys
+    sys.path.insert(0, "../")
+    import zeus
+                
     print("version zeus: " + zeus.__version__)
     print("Running tests for file.py...")
 
