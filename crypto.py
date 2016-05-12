@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # coding: utf8
 #-----------------------------------------------------------------
 # zeus: crypto.py
@@ -18,12 +19,19 @@ class SimpleCrypt():
         self.encoded_text = ''
     
     def encrypt(self, decoded_text):
-       print(decoded_text[0])
+    
+        self.decoded_text = bytearray(decoded_text.encode("utf8"))
+        
+        print(type(decoded_text))
+        print(decoded_text)
+        print(decoded_text[0])
+        print(self.key[0])
+        decoded_text[0] += self.key[0]
+        print(decoded_text[0])
     
     def __str__(self):
         return_string = "decoded text: " + self.decoded_text + "\nencoded text: " + self.encoded_text
         return(return_string)
-
  
         
 if __name__ == '__main__':
@@ -35,8 +43,8 @@ if __name__ == '__main__':
     print("Running tests for cryto.py...")
 
     print("testing class SimpleCrypt...")
-    cypher = SimpleCrypt("key".encode("utf8"))
-    cypher.encrypt("message secret".encode("utf8"))
+    cypher = SimpleCrypt(bytearray("key".encode("utf8")))
+    cypher.encrypt("message secret")
     print(cypher)
     print("Class SimpleCrypt passed")
 
