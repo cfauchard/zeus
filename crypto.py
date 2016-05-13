@@ -32,7 +32,7 @@ class SimpleCrypt():
     def __str__(self):
         return_string = "decoded text: " + self.decoded_text + "\nencoded text: " + self.encoded_text
         return(return_string)
- 
+
         
 if __name__ == '__main__':
     import sys
