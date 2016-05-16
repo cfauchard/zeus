@@ -10,6 +10,8 @@
 
 import os
 import base64
+import binascii
+import random
 
 class Vigenere():
 
@@ -23,14 +25,17 @@ class Vigenere():
     - key: key (utf8 string) or filename containing the key
     (if the key is stored in a file, it can contain any binary datas)      
     """
-    def __init__(self, key):
-    
-        if os.path.exists(key):
-            f = open(key, 'rb')
-            self.key = f.read()
-            f.close()
+    def __init__(self, key=None, output_file=None):
+        
+        if key == None:
+            self.genkey(output_file=output_file)
         else:
-            self.key = bytearray(key.encode('utf8'))
+            if os.path.exists(key):
+                f = open(key, 'rb')
+                self.key = f.read()
+                f.close()
+            else:
+                self.key = bytearray(key.encode('utf8'))
             
     """
     Parameters:
@@ -65,12 +70,17 @@ class Vigenere():
         	f.close()
          
     """
+    decrypting encrypted datas passed, update decrypted_datas attribute
+    
     Parameters:
     - encrypted_datas: encrypted message (base64 encoded ascii string) or 
     filename containing datas
     
     Optionnal parameters:
     - output_filename: file to write decrypted output
+    
+    Exceptions:
+    - binascii.Error: if encrypted datas are not base64 encrypted, need import binascii
     """
     def decrypt(self, crypted_datas, output_file=None):
         if os.path.exists(crypted_datas):
@@ -78,8 +88,8 @@ class Vigenere():
             self.crypted_datas = bytearray(base64.b64decode(f.read()))
             f.close()
         else:
-        	self.crypted_datas = bytearray(base64.b64decode(crypted_datas.encode("utf8")))
-        
+            self.crypted_datas = bytearray(base64.b64decode(crypted_datas.encode("utf8")))
+
         self.decrypted_datas = bytearray(self.crypted_datas)    
         j = 0
         for i in range(0, len(self.crypted_datas)):
@@ -89,12 +99,39 @@ class Vigenere():
             j += 1
         
         self.crypted_datas = base64.b64encode(self.crypted_datas)
-        
+                
         if output_file != None:
         	f = open(output_file, 'wb')
         	f.write(self.decrypted_datas)
         	f.close()
+     
+     
+    """
+    generate random binary keys, update the key attribute
+    
+    Optional parameters:
+    - size: size of the key, default 4096 bytes
+    - output_file: file to write the keys
+    """ 
+    def genkey(self, size=4096, output_file=None):
+        self.key = bytearray(size)
+        for i in range(0, size):
+            self.key[i] = random.getrandbits(8)
+            
+        if output_file != None:
+        	f = open(output_file, 'wb')
+        	f.write(self.key)
+        	f.close()
         	
+    def get_key(self):
+        return(self.key)           
+    
+    def get_crypted_datas(self):
+        return(self.crypted_datas)
+        
+    def get_decrypted_datas(self):
+        return(self.decrypted_datas)
+            	
     """
     print encrypted datas base64 coded
     """                
@@ -114,10 +151,11 @@ if __name__ == '__main__':
 
     print("testing class SimpleCrypt...")
     cipher = Vigenere("/bin/ls")
+    cipher.genkey(output_file="../tmp/key.dat")
     print(cipher)    
-    cipher.encrypt("Itnovem2015", output_file="../sample/crypted.dat")
+    cipher.encrypt("§§§§$$$€€€€€€fifihjll", output_file="../tmp/crypted.dat")
     print(cipher)
-    cipher.decrypt("GG5bbX1lbTMzMTU=", output_file="../sample/decrypted.dat")
+    cipher.decrypt("../tmp/crypted.dat", output_file="../tmp/decrypted.dat")
     print(cipher)
     print("Class SimpleCrypt passed")
 
