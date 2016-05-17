@@ -17,13 +17,13 @@ class ConfigParser(RawConfigParser):
         self.file_name = file_name
 
         if not os.path.isfile(file_name):
-            raise(FileNotFoundException(self.file_name))
+            raise(zeus.FileNotFoundException(self.file_name))
 
         try:
             self.read(self.file_name)
 
         except MissingSectionHeaderError:
-            raise(InvalidConfigurationFileException(self.file_name))
+            raise(zeus.InvalidConfigurationFileException(self.file_name))
 
     def __str__(self):
         return_string = ""
