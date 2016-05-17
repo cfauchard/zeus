@@ -15,6 +15,7 @@ version='1.0.a01'
 import argparse
 import zeus
 
+
 parser = argparse.ArgumentParser(description='manipulate zeus secret keys')
 parser.add_argument("command", choices=['create'], help="command")
 parser.add_argument("--version", action='version', version='%(prog)s ' + version)
