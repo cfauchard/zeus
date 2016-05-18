@@ -24,5 +24,5 @@ parser.add_argument("arguments", nargs='*', help="parameters of the script")
 args = parser.parse_args()
 
 separator = " "
-command_line = args.command + separator + separator.join(args.arguments)
+command_line = "export PYTHONPATH=" + base_dir + ";" + args.command + separator + separator.join(args.arguments)
 os.system(command_line)
