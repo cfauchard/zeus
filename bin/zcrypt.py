@@ -8,9 +8,6 @@
 # Copyright (C) 2016, Christophe Fauchard
 #-----------------------------------------------------------------
 
-import sys
-sys.path.insert(0, "../")
-
 version='1.0.a01'
 import argparse
 import zeus
