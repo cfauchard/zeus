@@ -10,6 +10,8 @@
 
 version='1.0.a01'
 import argparse
+import sys
+import pypath
 import zeus
 
 parser = argparse.ArgumentParser(description='encrypt/decrypt files using zeus.Vigenere class')

@@ -3,7 +3,7 @@
 #-----------------------------------------------------------------
 # zeus: run.py
 #
-# set environment and launch python scripts
+# process launcher
 #
 # Copyright (C) 2016, Christophe Fauchard
 #-----------------------------------------------------------------
@@ -11,18 +11,24 @@
 import os
 import sys
 import argparse
-
-base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-os.environ.setdefault("PYTHONPATH", base_dir)
-sys.path.insert(0, base_dir)
-
+import pypath
 import zeus
 
-parser = argparse.ArgumentParser(description='zeus environment setting')
-parser.add_argument("command", help="script to execute")
-parser.add_argument("arguments", nargs='*', help="parameters of the script")
-args = parser.parse_args()
+args_parser = argparse.ArgumentParser(description='process launcher')
+args_parser.add_argument("alias", help="alias to execute")
+args_parser.add_argument("--config_file", default="run.ini", help="configuration file")
+args_parser.add_argument("--list_alias", action="store_false", help="list aliases configured")
+args_parser.add_argument("arguments", nargs='*', help="parameters of the script")
+args = args_parser.parse_args()
+
+ini_parser = zeus.parser.ConfigParser(args.config_file)
+
+if ini_parser.has_option("alias", args.alias):
+    command = ini_parser.get("alias", args.alias)
+else:
+    print("ERROR: invalid alias " + args.alias)
+    sys.exit(0)
 
 separator = " "
-command_line = "export PYTHONPATH=" + base_dir + ";" + args.command + separator + separator.join(args.arguments)
+command_line = '"' + command + '"' + separator + separator.join(args.arguments)
 os.system(command_line)

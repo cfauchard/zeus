@@ -10,6 +10,8 @@
 
 import os
 from configparser import RawConfigParser, MissingSectionHeaderError
+import pypath
+import zeus
 
 class ConfigParser(RawConfigParser):
     def __init__(self, file_name):
@@ -17,13 +19,13 @@ class ConfigParser(RawConfigParser):
         self.file_name = file_name
 
         if not os.path.isfile(file_name):
-            raise(zeus.FileNotFoundException(self.file_name))
+            raise(zeus.exception.FileNotFoundException(self.file_name))
 
         try:
             self.read(self.file_name)
 
         except MissingSectionHeaderError:
-            raise(zeus.InvalidConfigurationFileException(self.file_name))
+            raise(zeus.exception.InvalidConfigurationFileException(self.file_name))
 
     def __str__(self):
         return_string = ""
@@ -36,7 +38,7 @@ class ConfigParser(RawConfigParser):
         
 if __name__ == '__main__':
     import sys
-    sys.path.insert(0, "../")
+    import pypath
     import zeus
 
     print("version zeus: " + zeus.__version__)
@@ -45,7 +47,7 @@ if __name__ == '__main__':
     print("testing class ConfigParser...")
 
     try:
-        config_file = 'parser_sample1.cfg'
+        config_file = '../sample/parser_sample1.cfg'
         parser = ConfigParser(config_file)
 
         print("parsing of " + config_file + " done")

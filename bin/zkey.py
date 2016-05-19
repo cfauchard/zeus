@@ -10,6 +10,7 @@
 
 version='1.0.a01'
 import argparse
+import pypath
 import zeus
 
 parser = argparse.ArgumentParser(description='manipulate zeus secret keys')
