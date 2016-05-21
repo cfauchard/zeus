@@ -8,16 +8,14 @@
 # Copyright (C) 2016, Christophe Fauchard
 #-----------------------------------------------------------------
 
-version='1.0.a01'
 import argparse
 import sys
-import pypath
 import zeus
 
 parser = argparse.ArgumentParser(description='encrypt/decrypt files using zeus.Vigenere class')
 parser.add_argument("command", choices=['crypt','decrypt'], help="command")
 parser.add_argument('keyfile', help="key file name")
-parser.add_argument("--version", action='version', version='%(prog)s ' + version)
+parser.add_argument("--version", action='version', version='%(prog)s ' + zeus.__version__)
 parser.add_argument('--infile', help="source data file (can be every binary file)")
 parser.add_argument('--outfile', help="destination data file (can be every binary file)")
 parser.add_argument('--string', help="string to encrypt (must be an utf8string)")                

@@ -10,7 +10,6 @@
 
 import os
 from configparser import RawConfigParser, MissingSectionHeaderError
-import pypath
 import zeus
 
 class ConfigParser(RawConfigParser):
@@ -38,7 +37,6 @@ class ConfigParser(RawConfigParser):
         
 if __name__ == '__main__':
     import sys
-    import pypath
     import zeus
 
     print("version zeus: " + zeus.__version__)

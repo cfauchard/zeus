@@ -11,16 +11,32 @@
 import os
 import sys
 import argparse
-import pypath
 import zeus
 
-args_parser = argparse.ArgumentParser(description='process launcher')
-args_parser.add_argument("alias", help="alias to execute")
-args_parser.add_argument("--config_file", default="run.ini", help="configuration file")
-args_parser.add_argument("--list_alias", action="store_false", help="list aliases configured")
-args_parser.add_argument("arguments", nargs='*', help="parameters of the script")
+#
+# Parse command line arguments
+# The option formatter_class=argparse.RawTextHelpFormatter allow
+# help fields to be multi lines 
+#
+args_parser = argparse.ArgumentParser(description = "Process launcher with python environment", 
+formatter_class=argparse.RawTextHelpFormatter)
+args_parser.add_argument("alias", help = "alias to execute")
+args_parser.add_argument("--config_file", default = "run.ini", help = """
+Configuration file syntax:
+- ini formatted config file
+- default config file ./run.ini
+- section [alias]
+- lines name = <path to a program>
+
+""")
+args_parser.add_argument("--list_alias", action="store_false", help = "list aliases configured")
+args_parser.add_argument("--version", action = 'version', version = '%(prog)s ' + zeus.__version__)
+args_parser.add_argument("arguments", nargs = '*', help = "parameters of the script")
 args = args_parser.parse_args()
 
+#
+# try to open config file (default run.ini in the working directory)
+#
 ini_parser = zeus.parser.ConfigParser(args.config_file)
 
 if ini_parser.has_option("alias", args.alias):
