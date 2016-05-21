@@ -15,12 +15,13 @@ if sys.version_info < (3, 5):
     raise RuntimeError('You need Python 3.5+ for this module.')
 
 from zeus.file import Log
-from zeus.parser import ConfigParser
+from zeus.parser import ConfigParser, XmlParser
 from zeus.exception import FileNotFoundException, InvalidConfigurationFileException
 from zeus.crypto import Vigenere
 
 __all__ = [ 'Log',
             'ConfigParser',
+            'XmlParser',
             'Vigenere',
             'FileNotFoundException',
             'InvalidConfigurationFileException' ]

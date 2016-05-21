@@ -11,6 +11,13 @@
 import os
 from configparser import RawConfigParser, MissingSectionHeaderError
 import zeus
+import xml.etree.ElementTree
+
+class XmlParser():
+ 	def __init__(self, file_name):
+ 		self.file_name = file_name
+ 		
+ 		self.tree = xml.etree.ElementTree.parse(self.file_name)
 
 class ConfigParser(RawConfigParser):
     def __init__(self, file_name):
@@ -33,26 +40,3 @@ class ConfigParser(RawConfigParser):
             for key in self.items(section):
                 return_string = return_string + key[0] + " = " + key[1] + "\n" 
         return(return_string)
-
-        
-if __name__ == '__main__':
-    import sys
-    import zeus
-
-    print("version zeus: " + zeus.__version__)
-    print("Running tests for parser.py...")
-
-    print("testing class ConfigParser...")
-
-    try:
-        config_file = '../sample/parser_sample1.cfg'
-        parser = ConfigParser(config_file)
-
-        print("parsing of " + config_file + " done")
-        print(parser)
-        print("Class ConfigParser passed")
-
-    except FileNotFoundException as error:
-        print("Class ConfigParser not passed, File not found: " + error.filename)
-    except:
-        print("Class ConfigParser not passed, Unexpected error:", sys.exc_info()[0])
