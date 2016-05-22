@@ -12,6 +12,24 @@ import argparse
 import sys
 import zeus
 
+def walk_callback(node):
+	 
+	try:	
+		if node.tag == 'data':
+			print("root")
+			walk_callback.country = ''
+		elif node.tag == 'country':
+			walk_callback.country = node.attrib['name']
+		elif node.tag == 'neighbor':
+			print(walk_callback.country, 'neighbor', node.attrib['name'], node.attrib['direction'])
+		elif node.tag in ['year', 'rank', 'gdppc'] :
+			print(walk_callback.country, node.tag, node.text)
+		else:
+			print(walk_callback.country, node.text)
+
+	except KeyError as error:
+		pass
+		
 #
 # Parse command line arguments
 # The option formatter_class=argparse.RawTextHelpFormatter allow
@@ -31,13 +49,9 @@ print("testing class XmlParser...")
 try:
 	print("parsing of " + args.xml_file + "...")
 	parser = zeus.XmlParser(args.xml_file)
-
 	print("parsing of " + args.xml_file + " done")
-	for Country in parser.root:
-		print(Country.tag, Country.attrib, flush=True)
-		for level2 in Country:
-			print(level2.tag, level2.attrib, level2.text, flush=True)
-				
+	
+	parser.walk(walk_callback) 
 
 except FileNotFoundError as error:
 	print("Class XmlParser not passed, File not found: " + error.filename)

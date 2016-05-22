@@ -19,7 +19,16 @@ class XmlParser():
 
         self.tree = xml.etree.ElementTree.parse(self.xml_file)
         self.root = self.tree.getroot()
-
+        
+    def walk(self, callback, node = None):
+        if node == None:
+            node = self.root
+    
+        callback(node)
+                    
+        for child in node:
+            self.walk(callback, child) 
+            
 class ConfigParser(RawConfigParser):
     def __init__(self, file_name):
         RawConfigParser.__init__(self)
