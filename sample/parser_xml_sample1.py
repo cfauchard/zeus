@@ -33,11 +33,13 @@ try:
 	parser = zeus.XmlParser(args.xml_file)
 
 	print("parsing of " + args.xml_file + " done")
-	print(parser)
+	for Country in parser.root:
+		print(Country.tag, Country.attrib, flush=True)
+		for level2 in Country:
+			print(level2.tag, level2.attrib, level2.text, flush=True)
+				
 
-except zeus.exception.FileNotFoundException as error:
+except FileNotFoundError as error:
 	print("Class XmlParser not passed, File not found: " + error.filename)
-except:
-	print("Class XmlParser not passed, Unexpected error:", sys.exc_info()[0])
 else:
 	print("Class XmlParser passed")

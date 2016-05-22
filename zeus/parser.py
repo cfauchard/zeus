@@ -14,10 +14,11 @@ import zeus
 import xml.etree.ElementTree
 
 class XmlParser():
- 	def __init__(self, file_name):
- 		self.file_name = file_name
- 		
- 		self.tree = xml.etree.ElementTree.parse(self.file_name)
+    def __init__(self, file_name):
+        self.xml_file = file_name
+
+        self.tree = xml.etree.ElementTree.parse(self.xml_file)
+        self.root = self.tree.getroot()
 
 class ConfigParser(RawConfigParser):
     def __init__(self, file_name):
