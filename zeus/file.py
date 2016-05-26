@@ -6,7 +6,31 @@
 # Copyright (C) 2016, Christophe Fauchard
 #-----------------------------------------------------------------
 
+import os
+
+class Path():
+
+    """
+    manipulate paths
+    - recursive path create
+    - archive path with date create
+    """
+
+    def __init__(self, path):
+        self.path = path
+        self.create(path)
+
+    def create(self, path):
+        if os.path.exists(path) or path == "":
+            return(True)
+        else:
+            if not (os.path.exists(os.path.dirname(path))):
+                self.create(os.path.dirname(path))
+            os.mkdir(path)
+
+
 class Log():
+
     """
     Log Class with switch capabilities
     """
@@ -30,27 +54,3 @@ class Log():
 
     def close(self):
         self.fd.close()
-
-if __name__ == '__main__':
-    import sys
-    sys.path.insert(0, "../")
-    import zeus
-                
-    print("version zeus: " + zeus.__version__)
-    print("Running tests for file.py...")
-
-    print("testing class Log...")
-
-    try:
-        log_file = 'file_sample1.log'
-        print("create log file: " + log_file)
-        log = zeus.Log(log_file)
-        print("writing datas in log file")
-        log.print("data")
-        print("closing log file")
-        log.close()
-
-        print("Class Log passed")
-
-    except:
-        print("Class Log not passed, Unexpected error:", sys.exc_info()[0])
