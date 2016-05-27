@@ -21,7 +21,7 @@ parser.add_argument('--outfile', help="destination data file (can be every binar
 parser.add_argument('--string', help="string to encrypt (must be an utf8string)")                
 args = parser.parse_args()
 
-cipher = zeus.Vigenere(args.keyfile)
+cipher = zeus.crypto.Vigenere(args.keyfile)
 
 if args.command == 'crypt':
 	if args.string != None:
@@ -34,11 +34,11 @@ if args.command == 'crypt':
 	
 elif args.command == 'decrypt':
 	if args.string != None:
-		cipher.decrypt(args.string, output_file=args.outfile)
+		#cipher.decrypt(args.string, output_file=args.outfile)
+		cipher.decrypt("QFIIJZI=")
 	elif args.infile != None:
 		cipher.decrypt(args.infile, output_file=args.outfile)
 
-	
 	if args.outfile == None:
 		print(cipher.get_decrypted_datas().decode("utf8"))
 

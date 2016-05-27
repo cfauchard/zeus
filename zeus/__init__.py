@@ -19,5 +19,3 @@ import zeus.parser
 import zeus.exception
 import zeus.crypto
 import zeus.date
-
-from zeus.parser import ConfigParser

@@ -52,7 +52,7 @@ class Vigenere():
             self.decrypted_datas = f.read()
             f.close()
         else:
-        	self.decrypted_datas = bytearray(decrypted_datas.encode("utf8"))
+            self.decrypted_datas = bytearray(decrypted_datas.encode("utf8"))
         
         self.crypted_datas = bytearray(self.decrypted_datas)               
         j = 0
@@ -65,9 +65,9 @@ class Vigenere():
         self.crypted_datas = base64.b64encode(self.crypted_datas)
             
         if output_file != None:
-        	f = open(output_file, 'wb')
-        	f.write(self.crypted_datas)
-        	f.close()
+            f = open(output_file, 'wb')
+            f.write(self.crypted_datas)
+            f.close()
          
     """
     decrypting encrypted datas passed, update decrypted_datas attribute
@@ -84,7 +84,7 @@ class Vigenere():
     """
     def decrypt(self, crypted_datas, output_file=None):
         if os.path.exists(crypted_datas):
-            f=open(crypted_datas, 'rb')
+            f = open(crypted_datas, 'rb')
             self.crypted_datas = bytearray(base64.b64decode(f.read()))
             f.close()
         else:
@@ -101,9 +101,9 @@ class Vigenere():
         self.crypted_datas = base64.b64encode(self.crypted_datas)
                 
         if output_file != None:
-        	f = open(output_file, 'wb')
-        	f.write(self.decrypted_datas)
-        	f.close()
+            f = open(output_file, 'wb')
+            f.write(self.decrypted_datas)
+            f.close()
      
      
     """
@@ -119,9 +119,9 @@ class Vigenere():
             self.key[i] = random.getrandbits(8)
             
         if output_file != None:
-        	f = open(output_file, 'wb')
-        	f.write(self.key)
-        	f.close()
+            f = open(output_file, 'wb')
+            f.write(self.key)
+            f.close()
         	
     def get_key(self):
         return(self.key)           
@@ -140,24 +140,6 @@ class Vigenere():
             return((self.crypted_datas).decode("ascii"))
         else:
             return("No crypted datas in buffer...")
-        
-if __name__ == '__main__':
-    import sys
-    sys.path.insert(0, "../")
-    import zeus
-
-    print("version zeus: " + zeus.__version__)
-    print("Running tests for cryto.py...")
-
-    print("testing class SimpleCrypt...")
-    cipher = Vigenere("/bin/ls")
-    cipher.genkey(output_file="../tmp/key.dat")
-    print(cipher)    
-    cipher.encrypt("§§§§$$$€€€€€€fifihjll", output_file="../tmp/crypted.dat")
-    print(cipher)
-    cipher.decrypt("../tmp/crypted.dat", output_file="../tmp/decrypted.dat")
-    print(cipher)
-    print("Class SimpleCrypt passed")
 
         
      

@@ -17,5 +17,5 @@ parser.add_argument("--version", action='version', version='%(prog)s ' + zeus.__
 parser.add_argument('outfile', type=argparse.FileType('wb'), help="destination key file")                
 args = parser.parse_args()
 
-cipher = zeus.Vigenere()
+cipher = zeus.crypto.Vigenere()
 args.outfile.write(cipher.get_key())
