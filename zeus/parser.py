@@ -10,8 +10,8 @@
 
 import os
 from configparser import RawConfigParser, MissingSectionHeaderError
-import zeus
 import xml.etree.ElementTree
+import zeus
 
 class XmlParser():
     def __init__(self, file_name):

@@ -9,7 +9,6 @@
 import os
 import datetime
 
-
 class Date():
     def __init__(self):
         self.value = datetime.datetime.now()
@@ -19,3 +18,8 @@ class Date():
 
     def date_iso(self):
         return (self.value.strftime('%Y-%m-%d'))
+
+    def path_date_tree(self, path):
+        return (os.path.join(path, self.value.strftime('%Y'),
+                             self.value.strftime('%m'),
+                             self.value.strftime('%d')))

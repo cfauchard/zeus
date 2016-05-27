@@ -14,3 +14,4 @@ now = zeus.date.Date()
 
 print(now.date_iso())
 print(now.date_time_iso())
+print(now.path_date_tree('tmp'))

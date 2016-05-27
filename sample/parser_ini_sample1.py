@@ -29,15 +29,13 @@ print("Running tests for parser.py...")
 print("testing class ConfigParser...")
 
 try:
-	parser = zeus.ConfigParser(args.ini_file)
+	parser = zeus.parser.ConfigParser(args.ini_file)
 
 	print("parsing of " + args.ini_file + " done")
 	print(parser)
 
 except zeus.exception.FileNotFoundException as error:
 	print("Class ConfigParser not passed, File not found: " + error.filename)
-except:
-	print("Class ConfigParser not passed, Unexpected error:", sys.exc_info()[0])
 else:
 	print("Class ConfigParser passed")
 

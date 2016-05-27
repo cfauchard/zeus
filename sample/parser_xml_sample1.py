@@ -48,7 +48,7 @@ print("testing class XmlParser...")
 
 try:
 	print("parsing of " + args.xml_file + "...")
-	parser = zeus.XmlParser(args.xml_file)
+	parser = zeus.parser.XmlParser(args.xml_file)
 	print("parsing of " + args.xml_file + " done")
 	
 	parser.walk(walk_callback) 
