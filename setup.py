@@ -10,5 +10,5 @@ setup(name='zeus',
       author_email = 'christophe.fauchard@gmail.com',
       license = 'GPLV3',
       packages = ['zeus'],
-      scripts = ['bin/run.py'],
+      scripts = ['bin/zkey.py', 'bin/zcrypt.py'],
       zip_safe = False)

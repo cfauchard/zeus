@@ -11,11 +11,11 @@
 import argparse
 import zeus
 
-parser = argparse.ArgumentParser(description='manipulate zeus secret keys')
-parser.add_argument("command", choices=['create'], help="command")
+parser = argparse.ArgumentParser(description='create zeus secret keys')
 parser.add_argument("--version", action='version', version='%(prog)s ' + zeus.__version__)
-parser.add_argument('outfile', type=argparse.FileType('wb'), help="destination key file")                
+parser.add_argument("--size", type=int, help="size of the key in bytes (default 4096)")
+parser.add_argument('outfile', help="destination key file")
 args = parser.parse_args()
 
-cipher = zeus.crypto.Vigenere()
-args.outfile.write(cipher.get_key())
+cipher = zeus.crypto.Vigenere(gen_key = args.outfile,
+                              key_size = args.size)

@@ -18,3 +18,7 @@ class InvalidConfigurationFileException(Exception):
     def __init__(self, filename):
         self.filename = filename
 
+class PrivateKeyException(Exception):
+
+    def __init__(self):
+        pass
