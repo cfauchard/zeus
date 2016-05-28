@@ -11,6 +11,9 @@ import datetime
 
 class Date():
     def __init__(self):
+        self.update()
+
+    def update(self):
         self.value = datetime.datetime.now()
 
     def date_time_iso(self):
@@ -23,3 +26,7 @@ class Date():
         return (os.path.join(path, self.value.strftime('%Y'),
                              self.value.strftime('%m'),
                              self.value.strftime('%d')))
+
+    def print(self):
+        self.update()
+        print(self.date_time_iso(), "", end='')

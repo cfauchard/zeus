@@ -66,7 +66,7 @@ class Vigenere():
         # (contain private key path)
         #
         elif os.environ.get("ZPK") is not None:
-            f = open(os.environ("ZPK"), 'rb')
+            f = open(os.environ.get("ZPK"), 'rb')
             self.key = f.read()
             f.close()
 
