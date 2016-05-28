@@ -12,7 +12,7 @@ import os
 import base64
 import binascii
 import random
-
+import zeus
 
 class Vigenere():
     """
@@ -65,7 +65,7 @@ class Vigenere():
         # try to read ZPK environment variable
         # (contain private key path)
         #
-        elif os.environ("ZPK"):
+        elif os.environ.get("ZPK") is not None:
             f = open(os.environ("ZPK"), 'rb')
             self.key = f.read()
             f.close()
@@ -75,8 +75,6 @@ class Vigenere():
         #
         else:
             raise zeus.exception.PrivateKeyException()
-
-
 
     """
     Parameters:
