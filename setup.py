@@ -1,4 +1,6 @@
 from setuptools import setup
+import glob
+import os
 
 exec(compile(open('zeus/_version.py').read(), 'zeus/_version.py', 'exec'))
 
@@ -11,4 +13,21 @@ setup(name='zeus',
       license = 'GPLV3',
       packages = ['zeus'],
       scripts = ['bin/zkey.py', 'bin/zcrypt.py'],
+      data_files = [
+            (
+                  'sample/zeus', [
+                        f for f in glob.glob(
+                              os.path.join('sample', '*.py')
+                        )
+                  ] + [
+                        f for f in glob.glob(
+                              os.path.join('sample', '*.ini')
+                        )
+                  ] + [
+                        f for f in glob.glob(
+                              os.path.join('sample', '*.xml')
+                        )
+                  ]
+            )
+      ],
       zip_safe = False)
