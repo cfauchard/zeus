@@ -7,6 +7,7 @@
 #-----------------------------------------------------------------
 
 import os
+import zeus
 
 class Path():
 
@@ -28,11 +29,19 @@ class Path():
                 self.create(os.path.dirname(path))
             os.mkdir(path)
 
+class DayArchivePath(Path):
+    """
+    create archive paths (format base/AAAA/MM/JJ)
+    """
+
+    def __init__(self, path):
+        path = zeus.date.Date().path_date_tree(path)
+        zeus.file.Path.__init__(self, path)
 
 class Log():
 
     """
-    Log Class with switch capabilities
+    Log Class with switch and level capabilities
     """
     
     def __init__(self, \

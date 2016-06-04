@@ -19,3 +19,4 @@ import zeus.parser
 import zeus.exception
 import zeus.crypto
 import zeus.date
+import zeus.log
