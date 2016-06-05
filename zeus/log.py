@@ -16,7 +16,7 @@ class Log():
     Log Class with switch and display level capabilities
     """
     def __init__(self,
-                 file_name,
+                 file_name=None,
                  number=7,
                  size=1048576,
                  frequence=None,
@@ -41,33 +41,34 @@ class Log():
         #
         self.formatter = logging.Formatter('%(asctime)s :: %(module)s :: %(levelname)s :: %(message)s')
 
-        if frequence is None:
+        if self.file_name is not None:
+            if frequence is None:
 
-            #
-            # create size based rotation log
-            #
-            self.file_handler = logging.handlers.RotatingFileHandler(
-                self.file_name,
-                'a',
-                self.size,
-                self.number)
-            self.file_handler.setFormatter(self.formatter)
-            self.logger.addHandler(self.file_handler)
-            self.file_handler.setLevel(self.level)
+                #
+                # create size based rotation log
+                #
+                self.file_handler = logging.handlers.RotatingFileHandler(
+                    self.file_name,
+                    'a',
+                    self.size,
+                    self.number)
+                self.file_handler.setFormatter(self.formatter)
+                self.logger.addHandler(self.file_handler)
+                self.file_handler.setLevel(self.level)
 
-        else:
+            else:
 
-            #
-            # create date based rotation log
-            #
-            self.file_handler = logging.handlers.TimedRotatingFileHandler(
-                self.file_name,
-                when=self.frequence,
-                interval=1,
-                backupCount=self.number)
-            self.file_handler.setFormatter(self.formatter)
-            self.logger.addHandler(self.file_handler)
-            self.file_handler.setLevel(self.level)
+                #
+                # create date based rotation log
+                #
+                self.file_handler = logging.handlers.TimedRotatingFileHandler(
+                    self.file_name,
+                    when=self.frequence,
+                    interval=1,
+                    backupCount=self.number)
+                self.file_handler.setFormatter(self.formatter)
+                self.logger.addHandler(self.file_handler)
+                self.file_handler.setLevel(self.level)
 
         #
         # create stdout handler
@@ -78,5 +79,6 @@ class Log():
 
     def set_level(self, level):
         self.level = level
-        self.file_handler.setLevel(self.level)
+        if self.file_name is not None:
+            self.file_handler.setLevel(self.level)
         self.stream_handler.setLevel(self.level)
