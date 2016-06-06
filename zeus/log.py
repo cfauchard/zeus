@@ -9,6 +9,7 @@
 import os
 import logging
 import logging.handlers
+import zeus
 
 class Log():
 
@@ -24,6 +25,8 @@ class Log():
                  level=logging.INFO
                  ):
         self.file_name = file_name
+        if file_name is not None:
+            self.dirname = zeus.file.Path(os.path.dirname(file_name))
         self.frequence = frequence
         self.number = number
         self.size = size
