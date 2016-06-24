@@ -13,6 +13,11 @@ class FileNotFoundException(Exception):
     def __init__(self, filename):
         self.filename = filename
 
+class DirectoryNotFoundException(Exception):
+
+    def __init__(self, directory):
+        self.directory = directory
+
 class InvalidConfigurationFileException(Exception):
 
     def __init__(self, filename):
