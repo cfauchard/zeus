@@ -4,7 +4,7 @@ import os
 
 exec(compile(open('zeus/_version.py').read(), 'zeus/_version.py', 'exec'))
 
-setup(name='zeus',
+setup(name='cfa_zeus',
       version = __version__,
       description = 'general tools: cryptography, file, parsing, log',
       url = 'https://github.com/cfauchard/zeus',
