@@ -5,19 +5,27 @@
 #
 # provide cryptograhic functions
 #
-# Copyright (C) 2016, Christophe Fauchard
+# Copyright (C) 2016-2017, Christophe Fauchard
 # -----------------------------------------------------------------
+"""
+Submodule: zeus.crypto
+
+provide cryptograhic functions
+
+Copyright (C) 2016-2017, Christophe Fauchard
+"""
 
 import os
 import base64
-import binascii
 import random
 import zeus
 
+
 class Vigenere():
+
     """
     Vigenere cipher
-    
+
     can handle binary datas for both key and datas
     crypt datas are base64 coded for portability if not stored in files
 
@@ -31,10 +39,10 @@ class Vigenere():
     """
 
     def __init__(self,
-                 string_key = None,
-                 file_key = None,
-                 gen_key = None,
-                 key_size = 4096):
+                 string_key=None,
+                 file_key=None,
+                 gen_key=None,
+                 key_size=4096):
 
         if key_size is None:
             key_size = 4096
@@ -44,8 +52,8 @@ class Vigenere():
         # generate a key in the file given
         #
         if gen_key is not None:
-            self.genkey(output_file = gen_key,
-                        size = self.key_size)
+            self.genkey(output_file=gen_key,
+                        size=self.key_size)
 
         #
         # read key from a file
@@ -59,7 +67,7 @@ class Vigenere():
         # key given as an utf8 string
         #
         elif string_key is not None:
-            self.key = bytearray(key.encode('utf8'))
+            self.key = bytearray(string_key.encode('utf8'))
 
         #
         # try to read ZPK environment variable
@@ -78,9 +86,10 @@ class Vigenere():
 
     """
     Parameters:
-    - decrypted_datas: decrypted message (utf8 string) or filename containing datas
+    - decrypted_datas: decrypted message (utf8 string)
+    or filename containing datas
     (if datas are stored in a file, it can contain any binary datas)
-    
+
     Optionnal parameters:
     - output_filename: file to write encrypted output base64 encoded
     """
@@ -101,47 +110,51 @@ class Vigenere():
         for i in range(0, len(self.decrypted_datas)):
             if j == len(self.key):
                 j = 0
-            self.crypted_datas[i] = (self.decrypted_datas[i] + self.key[j]) % 256
+            self.crypted_datas[i] = (self.decrypted_datas[i] +
+                                     self.key[j]) % 256
             j += 1
 
         self.crypted_datas = base64.b64encode(self.crypted_datas)
 
-        if output_file != None:
+        if output_file is not None:
             f = open(output_file, 'wb')
             f.write(self.crypted_datas)
             f.close()
 
     """
     decrypting encrypted datas passed, update decrypted_datas attribute
-    
+
     Parameters:
-    - encrypted_datas: encrypted message (base64 encoded ascii string) or 
+    - encrypted_datas: encrypted message (base64 encoded ascii string) or
     filename containing datas
-    
+
     Optionnal parameters:
     - output_filename: file to write decrypted output
-    
+
     Exceptions:
-    - binascii.Error: if encrypted datas are not base64 encrypted, need import binascii
+    - binascii.Error: if encrypted datas are not base64 encrypted,
+    need import binascii
     """
 
     def decrypt(self,
                 crypted_datas,
-                output_file = None):
+                output_file=None):
 
         if os.path.exists(crypted_datas):
             f = open(crypted_datas, 'rb')
             self.crypted_datas = bytearray(base64.b64decode(f.read()))
             f.close()
         else:
-            self.crypted_datas = bytearray(base64.b64decode(crypted_datas.encode("utf8")))
+            self.crypted_datas = bytearray(
+                base64.b64decode(crypted_datas.encode("utf8")))
 
         self.decrypted_datas = bytearray(self.crypted_datas)
         j = 0
         for i in range(0, len(self.crypted_datas)):
             if j == len(self.key):
                 j = 0
-            self.decrypted_datas[i] = (self.crypted_datas[i] - self.key[j]) % 256
+            self.decrypted_datas[i] = (
+                self.crypted_datas[i] - self.key[j]) % 256
             j += 1
 
         self.crypted_datas = base64.b64encode(self.crypted_datas)
@@ -153,7 +166,7 @@ class Vigenere():
 
     """
     generate random binary key, update the key attribute
-    
+
     Optional parameters:
     - size: size of the key, default 4096 bytes
     - output_file: file to write the keys
@@ -161,13 +174,13 @@ class Vigenere():
 
     def genkey(self,
                size,
-               output_file = None):
+               output_file=None):
 
         self.key = bytearray(size)
         for i in range(0, size):
             self.key[i] = random.getrandbits(8)
 
-        if output_file != None:
+        if output_file is not None:
             f = open(output_file, 'wb')
             f.write(self.key)
             f.close()

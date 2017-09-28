@@ -6,10 +6,19 @@
 # Copyright (C) 2016, Christophe Fauchard
 # -----------------------------------------------------------------
 
+"""
+Submodule: log.file
+
+Log an trace
+
+Copyright (C) 2016-2017, Christophe Fauchard
+"""
+
 import os
 import logging
 import logging.handlers
 import zeus
+
 
 class Log():
 
@@ -42,7 +51,8 @@ class Log():
         #
         # create formatter log
         #
-        self.formatter = logging.Formatter('%(asctime)s :: %(module)s :: %(levelname)s :: %(message)s')
+        self.formatter = logging.Formatter(
+            '%(asctime)s :: %(module)s :: %(levelname)s :: %(message)s')
 
         if self.file_name is not None:
             if frequence is None:

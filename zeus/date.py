@@ -6,10 +6,24 @@
 # Copyright (C) 2016, Christophe Fauchard
 # -----------------------------------------------------------------
 
+"""
+Submodule: zeus.date
+
+Dates manipulation
+
+Copyright (C) 2016-2017, Christophe Fauchard
+"""
+
 import os
 import datetime
 
+
 class Date():
+
+    """
+    Date class with iso format methods
+    """
+
     def __init__(self):
         self.update()
 

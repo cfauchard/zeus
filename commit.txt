@@ -1,0 +1,3 @@
+- version 3.4.0
+- add docstrings for all module and submodules files
+- correct syntax standards, clean code

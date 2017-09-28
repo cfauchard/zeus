@@ -5,15 +5,15 @@ import os
 exec(compile(open('zeus/_version.py').read(), 'zeus/_version.py', 'exec'))
 
 setup(name='cfa_zeus',
-      version = __version__,
-      description = 'general tools: cryptography, file, parsing, log',
-      url = 'https://github.com/cfauchard/zeus',
-      author = 'Christophe Fauchard',
-      author_email = 'christophe.fauchard@gmail.com',
-      license = 'GPLV3',
-      packages = ['zeus'],
-      scripts = ['bin/zkey.py', 'bin/zcrypt.py'],
-      data_files = [
+      version=__version__,
+      description='general tools: cryptography, file, parsing, log',
+      url='https://github.com/cfauchard/zeus',
+      author='Christophe Fauchard',
+      author_email='christophe.fauchard@gmail.com',
+      license='GPLV3',
+      packages=['zeus'],
+      scripts=['bin/zkey.py', 'bin/zcrypt.py'],
+      data_files=[
             (
                   'sample/zeus', [
                         f for f in glob.glob(
@@ -30,4 +30,4 @@ setup(name='cfa_zeus',
                   ]
             )
       ],
-      zip_safe = False)
+      zip_safe=False)
