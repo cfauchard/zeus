@@ -11,7 +11,7 @@ Module: zeus
 
 general usage toolbox
 
-Copyright (C) 2016-2017, Christophe Fauchard
+Copyright (C) 2016-2018, Christophe Fauchard
 """
 
 
