@@ -48,7 +48,6 @@ class Date():
         return (self.value.strftime('%Y-%m-%d'))
 
     def format(self, format_string):
-
         """
         Format datetime object according to format_string parameter
         """

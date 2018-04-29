@@ -16,12 +16,12 @@ import zeus
 #
 # Parse command line arguments
 # The option formatter_class=argparse.RawTextHelpFormatter allow
-# help fields to be multi lines 
+# help fields to be multi lines
 #
-args_parser = argparse.ArgumentParser(description = "Process launcher with python environment", 
-formatter_class=argparse.RawTextHelpFormatter)
-args_parser.add_argument("alias", help = "alias to execute")
-args_parser.add_argument("--config_file", default = "run.ini", help = """
+args_parser = argparse.ArgumentParser(description="Process launcher with python environment",
+                                      formatter_class=argparse.RawTextHelpFormatter)
+args_parser.add_argument("alias", help="alias to execute")
+args_parser.add_argument("--config_file", default="run.ini", help="""
 Configuration file syntax:
 - ini formatted config file
 - default config file ./run.ini
@@ -29,9 +29,9 @@ Configuration file syntax:
 - lines name = <path to a program>
 
 """)
-args_parser.add_argument("--list_alias", action="store_false", help = "list aliases configured")
-args_parser.add_argument("--version", action = 'version', version = '%(prog)s ' + zeus.__version__)
-args_parser.add_argument("arguments", nargs = '*', help = "parameters of the script")
+args_parser.add_argument("--list_alias", action="store_false", help="list aliases configured")
+args_parser.add_argument("--version", action='version', version='%(prog)s ' + zeus.__version__)
+args_parser.add_argument("arguments", nargs='*', help="parameters of the script")
 args = args_parser.parse_args()
 
 #

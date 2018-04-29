@@ -27,5 +27,6 @@ class LogTest(unittest.TestCase):
         self.assertNotEqual(vigenere.get_crypted_datas(), self.message)
         self.assertEqual(vigenere.get_decrypted_datas_utf8(), self.message)
 
+
 if __name__ == '__main__':
     unittest.main()

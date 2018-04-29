@@ -19,6 +19,7 @@ import logging
 import logging.handlers
 import zeus
 
+
 class Log():
 
     """
@@ -40,10 +41,11 @@ class Log():
     log.logger.error("%s %s", "test", "error message")
     log.logger.critical("%s %s", "test", "critical message")
     """
+
     def __init__(self,
                  file_name=None,
                  number=7,
-                 size=1024*1024,
+                 size=1024 * 1024,
                  frequence=None,
                  stdout='Yes',
                  level=logging.INFO,
