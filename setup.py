@@ -30,4 +30,5 @@ setup(name='cfa_zeus',
               ]
           )
       ],
-      zip_safe=False)
+      zip_safe=False,
+      test_suite='nose2.collector.collector')

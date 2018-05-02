@@ -69,3 +69,10 @@ class Date():
         """
         self.update()
         print(self.date_time_iso(), "", end='')
+
+    def __str__(self):
+        """
+        update datetime object and return date iso formatted
+        """
+        self.update()
+        return self.date_time_iso()

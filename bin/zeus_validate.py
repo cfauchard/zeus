@@ -9,11 +9,11 @@
 # -----------------------------------------------------------------
 
 import argparse
-import sys
 import zeus
 import unittest
 
-parser = argparse.ArgumentParser(description='run all unit tests of zeus module')
+parser = argparse.ArgumentParser(
+    description='run all unit tests of zeus module')
 parser.add_argument("--version", action='version', version='%(prog)s ' +
                     ' - zeus version ' + zeus.__version__)
 args = parser.parse_args()

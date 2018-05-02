@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------
-# zeus: test_crypto.py
+# zeus: test_Vigenere.py
 #
 # Define zeus.crypto.Vigenere class unittest
 #
