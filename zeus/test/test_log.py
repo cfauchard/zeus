@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+# coding: utf8
 # -----------------------------------------------------------------
-# zeus: test_Vigenere.py
+# zeus: test_log.py
 #
-# Define zeus.crypto.Vigenere class unittest
+# Define zeus.log.* classes unittest
 #
 # Copyright (C) 2016-2018, Christophe Fauchard
 # -----------------------------------------------------------------
@@ -10,16 +12,16 @@ import unittest
 import zeus
 
 
-class VigenereTest(unittest.TestCase):
+class LogTest(unittest.TestCase):
     """
-    define unit tests for zeus.crypto.Vigenere class
+    define unit tests for zeus.log.Log class
     """
 
     def setUp(self):
         self.message = "decrypted message"
         self.key = 'rqieD]-87M.xE}o!nU?EXTf.U!Dxvy'
 
-    def test_vigenere_memory(self):
+    def test_log_creation(self):
         vigenere = zeus.crypto.Vigenere(string_key=self.key)
         vigenere.encrypt(self.message)
 

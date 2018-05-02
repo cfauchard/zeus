@@ -5,7 +5,7 @@
 #
 # Define zeus file tools
 #
-# Copyright (C) 2016-2017, Christophe Fauchard
+# Copyright (C) 2016-2018, Christophe Fauchard
 # -----------------------------------------------------------------
 
 """
@@ -13,7 +13,7 @@ Submodule: zeus.file
 
 File and directory manipulation
 
-Copyright (C) 2016-2017, Christophe Fauchard
+Copyright (C) 2016-2018, Christophe Fauchard
 """
 
 import os
@@ -40,6 +40,11 @@ class Path():
                 self.create(os.path.dirname(path))
             os.mkdir(path)
 
+    def delete(self):
+        os.rmdir(self.path)
+
+    def __str__(self):
+        return(self.path)
 
 class DayArchivePath(Path):
 
@@ -50,30 +55,3 @@ class DayArchivePath(Path):
     def __init__(self, path):
         path = zeus.date.Date().path_date_tree(path)
         zeus.file.Path.__init__(self, path)
-
-
-class Log():
-
-    """
-    Log Class with switch and level capabilities
-    """
-
-    def __init__(self,
-                 file_name,
-                 number=10,
-                 size=1,
-                 frequence=None,
-                 ):
-
-        self.file_name = file_name
-        self.frequence = frequence
-        self.number = number
-        self.size = size
-
-        self.fd = open(self.file_name, "a")
-
-    def print(self, text):
-        print(text, file=self.fd)
-
-    def close(self):
-        self.fd.close()

@@ -1,3 +1,2 @@
-- rename test directories with test_ prefix
-- add nose2 unittest scripts
-- nose2 integrationin setup.py
+- reorg test files
+- create test_file.py first nose2 format unittest
