@@ -1,2 +1,1 @@
-- reorg test files
-- create test_file.py first nose2 format unittest
+- rename test dir to test_zeus

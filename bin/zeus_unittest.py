@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf8
 # -----------------------------------------------------------------
-# zeus: zeus_validate.py
+# zeus: zeus_unittest.py
 #
 # run all module unit tests
 #
